@@ -14,4 +14,6 @@ The tools .e.t.c can be used for real life tasks such as penetration testing and
 
 Use the information here to learn and become an elite hacker.
 If you wish to contribute to the repo, don't hesitate to push a pull request. :)
-Happy hacking !!!
+
+The directories are as follows:
+* Scripts - contains scripts
