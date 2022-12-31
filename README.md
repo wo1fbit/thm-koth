@@ -16,4 +16,6 @@ Use the information here to learn and become an elite hacker.
 If you wish to contribute to the repo, don't hesitate to push a pull request. :)
 
 The directories are as follows:
-* Scripts - contains scripts
+* Scripts - contains scripts for normal use such as spamming and killing enemy pty's and tty's
+* Persistence - cotains scripts and services that can be used to automate setting persistence
+* bin - contains standalone static binaries that can be used out of the box whenever needed
